@@ -2,9 +2,12 @@ import React, {FC, useEffect, useState} from 'react';
 import './styles.scss';
 import {ISongData} from "../../types/types";
 import Card from "../Card";
+import Result from "../Result";
+import {shuffleArray} from "../../utils";
 
 interface SwiperBlockProps {
-    songs: ISongData[]
+    songs: ISongData[],
+    volume: number
 }
 
 interface positions {
@@ -13,16 +16,35 @@ interface positions {
     id?: number
 }
 
-const SwiperBlock: FC<SwiperBlockProps> = ({songs}) => {
+const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
     const [likedSongs, setLikedSongs] = useState<ISongData[]>([]);
     const [allSongs, setAllSongs] = useState<ISongData[]>(songs);
     const [dragElem, setDragElem] = useState<HTMLElement | null>(null)
     const [dragElemPositions, setDragElemPositions] = useState<positions>({})
     const [elemLiked, setElemLiked] = useState<boolean | null>(null)
+    const [play, setPlay] = useState<boolean>(false);
+    const [audio, setAudio] = useState<HTMLAudioElement | null>(null)
 
     useEffect(() => {
-        setAllSongs(songs);
+        audio?.pause();
+        let newAudio: HTMLAudioElement | null = null;
+        if (allSongs[0]?.audio) {
+            newAudio = document.createElement('audio');
+            newAudio.src = allSongs[0].audio?.toString();
+            newAudio.volume = volume;
+        }
+
+        setAudio(newAudio);
+    }, [allSongs, volume]);
+
+    useEffect(() => {
+        play ? audio?.play() : audio?.pause();
+    }, [audio, play])
+
+    useEffect(() => {
+        setAllSongs(shuffleArray(songs));
     }, [songs]);
+
     const checkPosition = (clientX: number) => {
         const offsetWidth: number = (document.querySelector('#swiper-block') as HTMLElement).offsetWidth
         const centerX: number = offsetWidth / 2;
@@ -46,19 +68,19 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs}) => {
     }
 
     const setNewPosition = (clientX: number, pageX: number, pageY: number) => {
-        if (dragElem) {
+        if (dragElem && play) {
             checkPosition(clientX)
             dragElem.style.cursor = 'grabbing';
             dragElem.style.transform = `translate(${pageX - (dragElemPositions.x || 0)}px, ${pageY - (dragElemPositions.y || 0)}px)`
         }
     }
 
-    const onMouseDown = (event: React.MouseEvent, id: number):boolean => {
+    const onMouseDown = (event: React.MouseEvent, id: number): boolean => {
         setStartPositions(event.target as HTMLElement, event.pageX, event.pageY, id)
         return false;
     }
 
-    const onMouseMove = (event: React.MouseEvent):boolean => {
+    const onMouseMove = (event: React.MouseEvent): boolean => {
         setNewPosition(event.clientX, event.pageX, event.pageY)
         return false;
     }
@@ -67,7 +89,6 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs}) => {
         setNewPosition(coordinates.clientX, coordinates.pageX, coordinates.pageY)
     }
 
-    console.log(likedSongs)
     const dragOff = () => {
         if (dragElem) {
             if (elemLiked) {
@@ -92,7 +113,7 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs}) => {
         setStartPositions(event.target as HTMLElement, coordinates.pageX, coordinates.pageY, id)
     };
 
-    const classByElemLiked = ():string => {
+    const classByElemLiked = (): string => {
         if (elemLiked) return 'b_like';
         else if (elemLiked === false) return 'b_dislike';
         else return ''
@@ -114,9 +135,14 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs}) => {
                         onTouchStart={(e) => handleTouchEvent(e, song.id)}
                         onMouseDown={(e) => onMouseDown(e, song.id)}
                         song={song}
+                        isPlay={play}
+                        onPlay={() => setPlay(prev => !prev)}
                         zIndex={(allSongs.length || 0) - index}
                     />
                 })
+            }
+            {
+                (!allSongs.length && play) && <Result songs={likedSongs}/>
             }
         </div>
     );

@@ -1,14 +1,16 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import './styles.scss';
 import {ISongData} from "../../types/types";
 
 interface CardProps {
     onMouseDown: (e: React.MouseEvent) => any,
     onTouchStart: (e: React.TouchEvent) => any,
+    onPlay: () => void,
     song: ISongData,
-    zIndex?: number
+    zIndex?: number,
+    isPlay?: boolean
 }
-const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex}) => {
+const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex, isPlay, onPlay}) => {
     return (
         <div
             onMouseDown={onMouseDown}
@@ -17,9 +19,12 @@ const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex}) => {
             style={{zIndex}}
         >
             <div>{song.id}</div>
-            <div>{song.country}</div>
-            <div>{song.artist}</div>
-            <div>{song.name}</div>
+            <div className='btn_play' onClick={(e) => {
+                e.preventDefault()
+                onPlay()
+            }}>
+                {isPlay ? 'PAUSE!' : 'PLAY!'}
+            </div>
         </div>
     );
 };

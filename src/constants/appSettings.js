@@ -1,1 +1,2 @@
-export const APP_NAME = 'PESENKEN INIT TS-PROJECT';
+export const APP_NAME = 'PESENKEN';
+export const INIT_VOLUME = 0.01;

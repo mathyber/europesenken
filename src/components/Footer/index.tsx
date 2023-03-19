@@ -6,8 +6,8 @@ interface FooterData {
 }
 const Footer: FC<FooterData> = ({namePage}) => {
     return (
-        <footer className='data-block footer'>
-            {namePage}
+        <footer className='data-block'>
+            {namePage} / @mathyber
         </footer>
     );
 };
