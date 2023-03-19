@@ -39,19 +39,32 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs}) => {
             console.log('not change status')
         }
     };
+
+    const setStartPositions = (element: HTMLElement, x: number, y: number, id: number) => {
+        setDragElem(element);
+        setDragElemPositions({id, x, y});
+    }
+
+    const setNewPosition = (clientX: number, pageX: number, pageY: number) => {
+        if (dragElem) {
+            checkPosition(clientX)
+            dragElem.style.position = 'absolute'
+            dragElem.style.transform = `translate(${pageX - (dragElemPositions.x || 0)}px, ${pageY - (dragElemPositions.y || 0)}px)`
+        }
+    }
+
     const onMouseDown = (event: React.MouseEvent, id: number):boolean => {
-        setDragElem(event.target as HTMLElement)
-        setDragElemPositions({id: id, x: event.pageX, y: event.pageY})
+        setStartPositions(event.target as HTMLElement, event.pageX, event.pageY, id)
         return false;
     }
 
     const onMouseMove = (event: React.MouseEvent):boolean => {
-        if (dragElem) {
-            checkPosition(event.clientX)
-            dragElem.style.position = 'absolute'
-            dragElem.style.transform = `translate(${event.pageX - (dragElemPositions.x || 0)}px, ${event.pageY - (dragElemPositions.y || 0)}px)`
-        }
+        setNewPosition(event.clientX, event.pageX, event.pageY)
         return false;
+    }
+    const onTouchMove = (event: React.TouchEvent) => {
+        const coordinates = event.changedTouches[0];
+        setNewPosition(coordinates.clientX, coordinates.pageX, coordinates.pageY)
     }
 
     console.log(likedSongs)
@@ -73,17 +86,25 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs}) => {
         }
     }
 
+    const handleTouchEvent = (event: React.TouchEvent, id: number) => {
+        const coordinates = event.changedTouches[0];
+        setStartPositions(event.target as HTMLElement, coordinates.pageX, coordinates.pageY, id)
+    };
+
     return (
         <div
             className='swiper-block'
             id='swiper-block'
             onMouseUp={dragOff}
+            onTouchEnd={dragOff}
             onMouseMove={onMouseMove}
+            onTouchMove={onTouchMove}
         >
             {
                 allSongs.map((song, index) => {
                     return <Card
                         key={song.id}
+                        onTouchStart={(e) => handleTouchEvent(e, song.id)}
                         onMouseDown={(e) => onMouseDown(e, song.id)}
                         song={song}
                         zIndex={(allSongs.length || 0) - index}

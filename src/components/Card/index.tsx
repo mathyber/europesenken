@@ -4,13 +4,15 @@ import {ISongData} from "../../types/types";
 
 interface CardProps {
     onMouseDown: (e: React.MouseEvent) => any,
+    onTouchStart: (e: React.TouchEvent) => any,
     song: ISongData,
     zIndex?: number
 }
-const Card: FC<CardProps> = ({onMouseDown, song, zIndex}) => {
+const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex}) => {
     return (
         <div
             onMouseDown={onMouseDown}
+            onTouchStart={onTouchStart}
             className='card'
             style={{zIndex}}
         >
