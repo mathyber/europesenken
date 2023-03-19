@@ -11,6 +11,13 @@ interface CardProps {
     isPlay?: boolean
 }
 
+const stopPropagation = (e: any) => e.stopPropagation();
+
+const stopPropagationProps = {
+    onMouseDown: stopPropagation,
+    onTouchStart: stopPropagation,
+}
+
 const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex, isPlay, onPlay}) => {
     return (
         <div
@@ -19,16 +26,12 @@ const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex, isPlay, o
             className='card'
             style={{zIndex}}
         >
-            <div
-                onMouseDown={(e) => e.stopPropagation()}
-                onTouchStart={(e) => e.stopPropagation()}
-            >
+            <div {...stopPropagationProps}>
                 {song.id}
             </div>
             <div
+                {...stopPropagationProps}
                 className='btn_play'
-                onMouseDown={(e) => e.stopPropagation()}
-                onTouchStart={(e) => e.stopPropagation()}
                 onClick={(e) => {
                     e.preventDefault()
                     onPlay()
