@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import './styles.scss';
 import {ISongData} from "../../types/types";
 
@@ -10,6 +10,7 @@ interface CardProps {
     zIndex?: number,
     isPlay?: boolean
 }
+
 const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex, isPlay, onPlay}) => {
     return (
         <div
@@ -18,11 +19,20 @@ const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex, isPlay, o
             className='card'
             style={{zIndex}}
         >
-            <div>{song.id}</div>
-            <div className='btn_play' onClick={(e) => {
-                e.preventDefault()
-                onPlay()
-            }}>
+            <div
+                onMouseDown={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+            >
+                {song.id}
+            </div>
+            <div
+                className='btn_play'
+                onMouseDown={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                    e.preventDefault()
+                    onPlay()
+                }}>
                 {isPlay ? 'PAUSE!' : 'PLAY!'}
             </div>
         </div>
