@@ -1,13 +1,14 @@
 import React, {FC} from 'react';
+import './styles.scss';
 
 interface HeaderData {
     namePage: string
 }
 const Header: FC<HeaderData> = ({namePage}) => {
     return (
-        <div>
+        <header className='data-block header'>
             {namePage}
-        </div>
+        </header>
     );
 };
 

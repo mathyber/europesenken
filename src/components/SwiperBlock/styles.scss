@@ -1,0 +1,9 @@
+.swiper-block {
+  display: flex;
+  justify-content: center;
+
+  & > .card {
+    background-color: #3232af;
+    position: absolute;
+  }
+}

@@ -1,13 +1,14 @@
 import React, {FC} from 'react';
+import './styles.scss';
 
 interface FooterData {
     namePage: string
 }
 const Footer: FC<FooterData> = ({namePage}) => {
     return (
-        <div>
+        <footer className='data-block footer'>
             {namePage}
-        </div>
+        </footer>
     );
 };
 
