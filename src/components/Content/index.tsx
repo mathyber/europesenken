@@ -5,7 +5,7 @@ import './styles.scss';
 
 const Content: FC = () => {
     return (
-        <div className='data-block content'>
+        <div className='content'>
             <SwiperBlock songs={songsArray}/>
         </div>
     );

@@ -48,7 +48,7 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs}) => {
     const setNewPosition = (clientX: number, pageX: number, pageY: number) => {
         if (dragElem) {
             checkPosition(clientX)
-            dragElem.style.position = 'absolute'
+            dragElem.style.cursor = 'grabbing';
             dragElem.style.transform = `translate(${pageX - (dragElemPositions.x || 0)}px, ${pageY - (dragElemPositions.y || 0)}px)`
         }
     }
@@ -79,9 +79,10 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs}) => {
                 setAllSongs(prevAllSongs => prevAllSongs.filter(s => s.id !== dragElemPositions.id))
             }
 
-            dragElem.style.position = 'relative';
             dragElem.style.transform = '';
+            dragElem.style.cursor = 'grab';
             setDragElem(null);
+            setElemLiked(null);
             setDragElemPositions({});
         }
     }
@@ -91,9 +92,15 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs}) => {
         setStartPositions(event.target as HTMLElement, coordinates.pageX, coordinates.pageY, id)
     };
 
+    const classByElemLiked = ():string => {
+        if (elemLiked) return 'b_like';
+        else if (elemLiked === false) return 'b_dislike';
+        else return ''
+    }
+
     return (
         <div
-            className='swiper-block'
+            className={`swiper-block ${classByElemLiked()}`}
             id='swiper-block'
             onMouseUp={dragOff}
             onTouchEnd={dragOff}
