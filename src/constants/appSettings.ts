@@ -1,2 +1,2 @@
 export const APP_NAME = 'PESENKEN';
-export const INIT_VOLUME = 0.01;
+export const INIT_VOLUME = 0.5;
