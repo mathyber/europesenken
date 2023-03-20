@@ -1,3 +1,40 @@
 .result {
+  padding: 20px;
 
+  > div:first-child, > div:last-child {
+    text-align: center;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  &__songs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__song {
+    padding: 10px;
+    margin: 5px;
+    color: white;
+    border-radius: 40px;
+    font-size: 20px;
+    text-align: center;
+    width: 400px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    > div {
+      &:first-child {
+        font-size: 15px;
+        font-weight: 700;
+      }
+      &:last-child {
+        font-size: 19px;
+      }
+    }
+  }
 }

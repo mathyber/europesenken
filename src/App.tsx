@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import {APP_NAME} from "./constants/appSettings";

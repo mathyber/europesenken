@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 import './styles.scss';
-import {ISongData} from "../../types/types";
+import {ISongWithAddParams} from "../../types/types";
 
 interface CardProps {
     onMouseDown: (e: React.MouseEvent) => any,
     onTouchStart: (e: React.TouchEvent) => any,
     onPlay: () => void,
-    song: ISongData,
+    song: ISongWithAddParams,
     zIndex?: number,
     isPlay?: boolean
 }
@@ -23,11 +23,14 @@ const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex, isPlay, o
         <div
             onMouseDown={onMouseDown}
             onTouchStart={onTouchStart}
-            className='card'
-            style={{zIndex}}
+            className={`card gradient ${!isPlay ? 'paused' : ''}`}
+            style={{
+                zIndex,
+                background: `linear-gradient(153deg, ${!isPlay ? 'grey' : song.color1}, ${!isPlay ? 'black' : song.color2})`
+            }}
         >
-            <div {...stopPropagationProps}>
-                {song.id}
+            <div className='song-number' {...stopPropagationProps}>
+                Song No.{song.number}
             </div>
             <div
                 {...stopPropagationProps}
@@ -36,7 +39,7 @@ const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex, isPlay, o
                     e.preventDefault()
                     onPlay()
                 }}>
-                {isPlay ? 'PAUSE!' : 'PLAY!'}
+                <span className="material-symbols-outlined">{!isPlay ? 'play_arrow' : 'pause'}</span>
             </div>
         </div>
     );

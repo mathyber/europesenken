@@ -1,9 +1,11 @@
 import React, {FC, useEffect, useState} from 'react';
 import './styles.scss';
-import {ISongData} from "../../types/types";
+import {ISongData, ISongWithAddParams} from "../../types/types";
 import Card from "../Card";
 import Result from "../Result";
-import {shuffleArray} from "../../utils";
+import {getRandomContrastColor, getRandomNumber, shuffleArray} from "../../utils";
+import {debounce} from 'lodash';
+import Start from "../Start";
 
 interface SwiperBlockProps {
     songs: ISongData[],
@@ -17,11 +19,12 @@ interface positions {
 }
 
 const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
-    const [likedSongs, setLikedSongs] = useState<ISongData[]>([]);
-    const [allSongs, setAllSongs] = useState<ISongData[]>(songs);
+    const [likedSongs, setLikedSongs] = useState<ISongWithAddParams[]>([]);
+    const [allSongs, setAllSongs] = useState<ISongWithAddParams[]>([]);
     const [dragElem, setDragElem] = useState<HTMLElement | null>(null)
     const [dragElemPositions, setDragElemPositions] = useState<positions>({})
     const [elemLiked, setElemLiked] = useState<boolean | null>(null)
+    const [globalPlay, setGlobalPlay] = useState<boolean>(false);
     const [play, setPlay] = useState<boolean>(false);
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null)
 
@@ -42,7 +45,12 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
     }, [audio, play])
 
     useEffect(() => {
-        setAllSongs(shuffleArray(songs));
+        setAllSongs(shuffleArray(songs).map((s, index) => ({
+            ...s,
+            color1: getRandomContrastColor(),
+            color2: getRandomContrastColor(),
+            number: index + 1
+        })));
     }, [songs]);
 
     const checkPosition = (clientX: number) => {
@@ -119,9 +127,24 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
         else return ''
     }
 
+    const setClassInBody = () => {
+        // @ts-ignore
+        document.querySelector('body').className = classByElemLiked()
+    }
+
+    const setClassInBodyDebounce = debounce(setClassInBody, 100);
+
+    useEffect(() => {
+        setClassInBodyDebounce();
+    }, [elemLiked])
+
+    useEffect(() => {
+        globalPlay && setPlay(true);
+    }, [globalPlay]);
+
     return (
         <div
-            className={`swiper-block ${classByElemLiked()}`}
+            className={`swiper-block`}
             id='swiper-block'
             onMouseUp={dragOff}
             onTouchEnd={dragOff}
@@ -129,20 +152,27 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
             onTouchMove={onTouchMove}
         >
             {
-                allSongs.map((song, index) => {
-                    return <Card
-                        key={song.id}
-                        onTouchStart={(e) => handleTouchEvent(e, song.id)}
-                        onMouseDown={(e) => onMouseDown(e, song.id)}
-                        song={song}
-                        isPlay={play}
-                        onPlay={() => setPlay(prev => !prev)}
-                        zIndex={(allSongs.length || 0) - index}
-                    />
-                })
-            }
-            {
-                (!allSongs.length && play) && <Result songs={likedSongs}/>
+                (!allSongs.length && play)
+                    ? <Result songs={likedSongs}/>
+                    : (
+                        !globalPlay
+                            ? <Start play={() => setGlobalPlay(true)}/>
+                            : <div className='cards'>
+                                {
+                                    allSongs.slice(0, 2).map((song, index) => {
+                                        return <Card
+                                            key={song.id}
+                                            onTouchStart={(e) => handleTouchEvent(e, song.id)}
+                                            onMouseDown={(e) => onMouseDown(e, song.id)}
+                                            song={song}
+                                            isPlay={play}
+                                            onPlay={() => setPlay(prev => !prev)}
+                                            zIndex={(allSongs.length || 0) - index}
+                                        />
+                                    })
+                                }
+                            </div>
+                    )
             }
         </div>
     );
