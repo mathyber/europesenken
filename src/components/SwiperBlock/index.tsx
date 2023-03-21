@@ -3,7 +3,7 @@ import './styles.scss';
 import {ISongData, ISongWithAddParams} from "../../types/types";
 import Card from "../Card";
 import Result from "../Result";
-import {getRandomContrastColor, getRandomNumber, shuffleArray} from "../../utils";
+import {getRandomContrastColor, shuffleArray} from "../../utils";
 import {debounce} from 'lodash';
 import Start from "../Start";
 
@@ -60,13 +60,10 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
         const borderRight: number = centerX + 100;
         if (clientX < borderLeft) {
             setElemLiked(false);
-            console.log('Song is not liked')
         } else if (clientX > borderRight) {
             setElemLiked(true)
-            console.log('Song is liked')
         } else {
             setElemLiked(null)
-            console.log('not change status')
         }
     };
 
@@ -76,7 +73,7 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
     }
 
     const setNewPosition = (clientX: number, pageX: number, pageY: number) => {
-        if (dragElem && play) {
+        if (dragElem) {
             checkPosition(clientX)
             dragElem.style.cursor = 'grabbing';
             dragElem.style.transform = `translate(${pageX - (dragElemPositions.x || 0)}px, ${pageY - (dragElemPositions.y || 0)}px)`
@@ -153,7 +150,7 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
         >
             {
                 (!allSongs.length && play)
-                    ? <Result songs={likedSongs}/>
+                    ? <Result songs={likedSongs} volume={volume}/>
                     : (
                         !globalPlay
                             ? <Start play={() => setGlobalPlay(true)}/>

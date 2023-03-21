@@ -32,7 +32,7 @@ const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex, isPlay, o
             <div className='song-number' {...stopPropagationProps}>
                 Song No.{song.number}
             </div>
-            <div
+            <button
                 {...stopPropagationProps}
                 className='btn_play'
                 onClick={(e) => {
@@ -40,7 +40,7 @@ const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex, isPlay, o
                     onPlay()
                 }}>
                 <span className="material-symbols-outlined">{!isPlay ? 'play_arrow' : 'pause'}</span>
-            </div>
+            </button>
         </div>
     );
 };

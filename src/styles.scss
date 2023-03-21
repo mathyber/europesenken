@@ -42,7 +42,20 @@ body {
   background: linear-gradient(153deg, #0400ff, #ff00c3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.btn {
+  margin-top: 10px;
+  border: 0;
+  border-radius: 30px;
+  padding: 10px;
+  color: white !important;
+  cursor: pointer;
+  &:hover {
+    background: #ff00c3;
+  }
+}
+
 .btn_play {
+  border: 0;
   margin: 10px auto;
   cursor: pointer;
   height: 100px;
@@ -50,6 +63,7 @@ body {
   border-radius: 50%;
   background-color: rgb(255, 0, 0);
   text-align: center;
+  color: white;
 
   .material-symbols-outlined {
     padding: 20px;

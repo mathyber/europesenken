@@ -1,3 +1,14 @@
+@keyframes background {
+  50% {
+    box-shadow: 0 -120px 100px -100px #ff0202 inset;
+  }
+}
+
+.gradient-animation {
+  box-shadow: 0 -200px 100px -120px #000000 inset;
+  animation: background 1s infinite alternate;
+}
+
 .result {
   padding: 20px;
 
@@ -15,6 +26,11 @@
   }
 
   &__song {
+    cursor: pointer;
+    &:hover {
+      opacity: .6;
+    }
+
     padding: 10px;
     margin: 5px;
     color: white;
@@ -27,14 +43,13 @@
     flex-direction: column;
     justify-content: center;
 
-    > div {
-      &:first-child {
-        font-size: 15px;
-        font-weight: 700;
-      }
-      &:last-child {
-        font-size: 19px;
-      }
+    .song-name {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    .country {
+      font-size: 19px;
     }
   }
 }

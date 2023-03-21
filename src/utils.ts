@@ -1,3 +1,6 @@
+import html2canvas from "html2canvas";
+import {APP_NAME} from "./constants/appSettings";
+
 export function shuffleArray<T>(myArray: T[]): T[] {
     const shuffledArray = [...myArray];
     shuffledArray.sort(() => Math.random() - 0.5);
@@ -39,4 +42,16 @@ function getDistance(color1: RGBColor, color2: RGBColor): number {
         (4 * gDiff * gDiff) +
         ((2 + (255 - rMean) / 256) * bDiff * bDiff)
     ) || 0;
+}
+
+export const screenElement = (block: HTMLElement) => {
+    html2canvas(block).then(canvas => {
+        let downloadLink = document.createElement('a');
+        let dataURL = canvas.toDataURL('image/png');
+        let url = dataURL.replace(/^data:image\/png/,'data:application/octet-stream');
+        downloadLink.setAttribute('href', url);
+        downloadLink.setAttribute('download', `${APP_NAME}.png`);
+        downloadLink.click();
+        block.remove();
+    })
 }
