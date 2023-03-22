@@ -53,14 +53,10 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
         })));
     }, [songs]);
 
-    const checkPosition = (clientX: number) => {
-        const offsetWidth: number = (document.querySelector('#swiper-block') as HTMLElement).offsetWidth
-        const centerX: number = offsetWidth / 2;
-        const borderLeft: number = centerX - 40;
-        const borderRight: number = centerX + 40;
-        if (clientX < borderLeft) {
+    const checkPosition = (x: number) => {
+        if (x < -30) {
             setElemLiked(false);
-        } else if (clientX > borderRight) {
+        } else if (x > 30) {
             setElemLiked(true)
         } else {
             setElemLiked(null)
@@ -76,7 +72,7 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
 
     const setNewPosition = (clientX: number, pageX: number, pageY: number) => {
         if (dragElem) {
-            checkPosition(clientX)
+            checkPosition(pageX - (dragElemPositions.x || 0))
             dragElem.style.cursor = 'grabbing';
             dragElem.style.transform = `translate(${pageX - (dragElemPositions.x || 0)}px, ${pageY - (dragElemPositions.y || 0)}px)`
         }
