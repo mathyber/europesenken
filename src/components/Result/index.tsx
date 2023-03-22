@@ -17,13 +17,19 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
 
     const onClick = () => {
         const el = (document.getElementById('result') as HTMLElement).cloneNode(true);
-        const element = document.body.appendChild(el) as HTMLElement;
+        const element = document.body.appendChild(document.createElement('div')) as HTMLElement;
+        element.appendChild(el);
         if (element) {
             element.style.width = '1411px';
-            while (element.getBoundingClientRect().height < (element.getBoundingClientRect().width / 2)) {
-                element.style.width = `${element.getBoundingClientRect().width - 100}px`;
+            const h = element.getBoundingClientRect().height;
+            const w = element.getBoundingClientRect().width;
+            if (h < w) {
+                if (h < 500) element.style.height = '500px';
+                element.style.width = `${element.getBoundingClientRect().height}px`;
             }
             let gaElems: HTMLCollectionOf<Element> = element.getElementsByClassName('gradient-animation');
+            let sElems: HTMLCollectionOf<Element> = element.getElementsByClassName('result__songs');
+            Array.from(sElems).forEach(e => e.classList.add('m-w-400px'));
             gaElems[0]?.classList.remove('gradient-animation')
             gaElems = element.getElementsByClassName('res-btn');
             gaElems[0]?.remove();
@@ -33,7 +39,16 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             e.textContent = APP_NAME + ' by @mathyber';
             e.style.fontSize = '10px'
             e.style.color = 'gray'
-            element.appendChild(e)
+
+            element.children[0].appendChild(e)
+
+            element.style.display = 'flex'
+            element.style.flexDirection = 'column'
+            element.style.justifyContent = 'center'
+
+            //To hide the element from the screen
+            element.style.top = '-5555px'
+            element.style.position = 'absolute'
         }
         screenElement(element);
     }
