@@ -153,7 +153,7 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
             onTouchMove={onTouchMove}
         >
             {
-                (!allSongs.length && play)
+                (!allSongs.length && globalPlay)
                     ? <Result songs={likedSongs} volume={volume}/>
                     : (
                         !globalPlay
