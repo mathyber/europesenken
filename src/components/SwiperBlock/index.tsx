@@ -126,7 +126,7 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
 
     const setClassInBody = () => {
         // @ts-ignore
-        document.querySelector('body').className = classByElemLiked()
+        document.querySelector('#root').className = classByElemLiked()
     }
 
     const setClassInBodyDebounce = debounce(setClassInBody, 100);
