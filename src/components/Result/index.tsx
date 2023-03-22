@@ -1,9 +1,7 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import './styles.scss';
 import {ISongWithAddParams} from "../../types/types";
 import {screenElement} from "../../utils";
-import {Simulate} from "react-dom/test-utils";
-import wheel = Simulate.wheel;
 import {APP_NAME} from "../../constants/appSettings";
 
 interface ResultProps {
@@ -15,18 +13,20 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
     const [playId, setPlayId] = useState<number | null>(null);
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
 
-    const onClick = () => {
-        const el = (document.getElementById('result') as HTMLElement).cloneNode(true);
+    const createImg = () => {
+        const resultEl = document.getElementById('result');
+        const el = (resultEl as HTMLElement).cloneNode(true);
         const element = document.body.appendChild(document.createElement('div')) as HTMLElement;
         element.appendChild(el);
         if (element) {
             element.style.width = '1411px';
-            const h = element.getBoundingClientRect().height;
-            const w = element.getBoundingClientRect().width;
-            if (h < w) {
-                if (h < 500) element.style.height = '500px';
-                element.style.width = `${element.getBoundingClientRect().height}px`;
+            if (element.getBoundingClientRect().height < element.getBoundingClientRect().width) {
+                if (element.getBoundingClientRect().height < 500) element.style.height = '500px';
+                while ((element.getBoundingClientRect().height + 150) < element.getBoundingClientRect().width) {
+                    element.style.width = `${element.getBoundingClientRect().width - 1}px`
+                }
             }
+
             let gaElems: HTMLCollectionOf<Element> = element.getElementsByClassName('gradient-animation');
             let sElems: HTMLCollectionOf<Element> = element.getElementsByClassName('result__songs');
             Array.from(sElems).forEach(e => e.classList.add('m-w-400px'));
@@ -92,7 +92,7 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             {songs.length ? <div className='res-btn'>
                 Share the results with your friends!
                 <div>
-                    <button className='btn gradient' onClick={onClick}>
+                    <button className='btn gradient' onClick={createImg}>
                         download image file
                     </button>
                 </div>

@@ -56,8 +56,8 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
     const checkPosition = (clientX: number) => {
         const offsetWidth: number = (document.querySelector('#swiper-block') as HTMLElement).offsetWidth
         const centerX: number = offsetWidth / 2;
-        const borderLeft: number = centerX - 100;
-        const borderRight: number = centerX + 100;
+        const borderLeft: number = centerX - 40;
+        const borderRight: number = centerX + 40;
         if (clientX < borderLeft) {
             setElemLiked(false);
         } else if (clientX > borderRight) {

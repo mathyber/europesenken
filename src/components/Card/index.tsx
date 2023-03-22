@@ -11,7 +11,10 @@ interface CardProps {
     isPlay?: boolean
 }
 
-const stopPropagation = (e: any) => e.stopPropagation();
+const stopPropagation = (e: any) => {
+    e.stopPropagation();
+    e.preventDefault();
+};
 
 const stopPropagationProps = {
     onMouseDown: stopPropagation,
@@ -29,9 +32,8 @@ const Card: FC<CardProps> = ({onMouseDown, onTouchStart, song, zIndex, isPlay, o
                 background: `linear-gradient(153deg, ${!isPlay ? 'grey' : song.color1}, ${!isPlay ? 'black' : song.color2})`
             }}
         >
-            <div className='song-number' {...stopPropagationProps}>
-                Song No.{song.number}
-            </div>
+            Song No.{song.number}
+
             <button
                 {...stopPropagationProps}
                 className='btn_play'
