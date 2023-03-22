@@ -68,6 +68,8 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
     };
 
     const setStartPositions = (element: HTMLElement, x: number, y: number, id: number) => {
+        // @ts-ignore
+        document.querySelector('#root').style.overflow = 'hidden'
         setDragElem(element);
         setDragElemPositions({id, x, y});
     }
@@ -111,6 +113,8 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
             setElemLiked(null);
             setDragElemPositions({});
         }
+        // @ts-ignore
+        document.querySelector('#root').style.overflow = 'auto'
     }
 
     const handleTouchEvent = (event: React.TouchEvent, id: number) => {
