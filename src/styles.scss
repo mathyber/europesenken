@@ -14,12 +14,11 @@
 }
 
 body {
-  position: fixed; //it's bad practice, but pofig
   overflow: auto;
-  overflow-x: hidden;
 }
 
 #root {
+  position: fixed; //it's bad practice, but pofig
   height: 100%;
   width: 100vw;
   overflow: auto;
