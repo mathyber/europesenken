@@ -12,7 +12,6 @@ interface ResultProps {
 const Result: FC<ResultProps> = ({songs, volume}) => {
     const [playId, setPlayId] = useState<number | null>(null);
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
-
     const createImg = () => {
         const resultEl = document.getElementById('result');
         const el = (resultEl as HTMLElement).cloneNode(true);
@@ -23,9 +22,13 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
         if (element) {
             element.style.width = '5644px';
             if (element.getBoundingClientRect().height < element.getBoundingClientRect().width) {
-                if (element.getBoundingClientRect().height < 1500) element.style.height = '1500px';
+                if (songs.length < 5) element.style.height = `${1300+(100*songs.length)}px`;
+
                 while ((element.getBoundingClientRect().height + 150) < element.getBoundingClientRect().width) {
                     element.style.width = `${element.getBoundingClientRect().width - 1}px`
+                }
+                if (songs.length > 7) while ((element.getBoundingClientRect().height + 550) > element.getBoundingClientRect().width) {
+                    element.style.width = `${element.getBoundingClientRect().width + 1}px`
                 }
             }
 

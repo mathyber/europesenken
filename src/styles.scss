@@ -75,6 +75,8 @@ body {
 .style-export {
   .result {
     &__songs {
+      padding-right: 150px !important;
+      padding-left: 150px !important;
       margin-bottom: 50px;
     }
     &__song {
