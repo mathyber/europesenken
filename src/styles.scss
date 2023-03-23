@@ -72,6 +72,27 @@ body {
   }
 }
 
-.m-w-400px {
-  min-width: 400px !important;
+.style-export {
+  .result {
+    &__songs {
+      margin-bottom: 50px;
+    }
+    &__song {
+      min-width: 1200px !important;
+      font-size: 60px !important;
+      border-radius: 160px !important;
+      background-color: red !important;
+      margin: 15px;
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+  }
+
+  .country {
+    font-size: 57px !important;
+  }
+
+  .label-txt {
+    font-size: 50px !important;
+  }
 }

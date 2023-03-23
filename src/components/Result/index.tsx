@@ -18,18 +18,18 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
         const el = (resultEl as HTMLElement).cloneNode(true);
         const element = document.body.appendChild(document.createElement('div')) as HTMLElement;
         element.appendChild(el);
+        element?.classList.add('style-export')
+
         if (element) {
-            element.style.width = '1411px';
+            element.style.width = '5644px';
             if (element.getBoundingClientRect().height < element.getBoundingClientRect().width) {
-                if (element.getBoundingClientRect().height < 500) element.style.height = '500px';
+                if (element.getBoundingClientRect().height < 1500) element.style.height = '1500px';
                 while ((element.getBoundingClientRect().height + 150) < element.getBoundingClientRect().width) {
                     element.style.width = `${element.getBoundingClientRect().width - 1}px`
                 }
             }
 
             let gaElems: HTMLCollectionOf<Element> = element.getElementsByClassName('gradient-animation');
-            let sElems: HTMLCollectionOf<Element> = element.getElementsByClassName('result__songs');
-            Array.from(sElems).forEach(e => e.classList.add('m-w-400px'));
             gaElems[0]?.classList.remove('gradient-animation')
             gaElems = element.getElementsByClassName('res-btn');
             gaElems[0]?.remove();
@@ -37,8 +37,11 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             el.textContent = 'I liked these songs of Eurovision 2023:';
             let e = document.createElement('div');
             e.textContent = APP_NAME + ' by @mathyber';
-            e.style.fontSize = '10px'
+            e.style.fontSize = '40px'
             e.style.color = 'gray'
+            let l = document.createElement('div');
+            l.textContent = 'europesenken.lol';
+            e.appendChild(l)
 
             element.children[0].appendChild(e)
 
