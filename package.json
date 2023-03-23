@@ -1,6 +1,6 @@
 {
-  "name": "pesenken",
-  "version": "0.1.0",
+  "name": "europesenken",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@react-spring/web": "^9.5.5",
