@@ -8,7 +8,7 @@ const Footer: FC<FooterData> = ({namePage}) => {
     return (
         <footer className='data-block footer'>
             <div>Created by <a href='https://github.com/mathyber'>@mathyber</a></div>
-            <a href='https://github.com/mathyber/pesenken'>Project on GitHub</a>
+            <a href='https://github.com/mathyber/europesenken'>Project on GitHub</a>
         </footer>
     );
 };
