@@ -43,7 +43,7 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             e.style.fontSize = '40px'
             e.style.color = 'gray'
             let l = document.createElement('div');
-            l.textContent = 'europesenken.lol';
+            l.textContent = 'europesenken';
             e.appendChild(l)
 
             element.children[0].appendChild(e)
