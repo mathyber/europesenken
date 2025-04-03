@@ -41,7 +41,6 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
     }, [allSongs, volume]);
 
     useEffect(() => {
-        alert(`${play}: ${!!audio}`)
         play ? audio?.play() : audio?.pause();
     }, [audio, play])
 
