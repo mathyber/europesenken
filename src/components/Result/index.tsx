@@ -39,11 +39,11 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             const el = element.getElementsByClassName('label-txt')[0];
             el.textContent = 'I liked these songs of Eurovision 2025:';
             let e = document.createElement('div');
-            e.textContent = APP_NAME + ' by @mathyber';
+            e.textContent = APP_NAME + ' by Laritovski';
             e.style.fontSize = '40px'
             e.style.color = 'gray'
             let l = document.createElement('div');
-            l.textContent = 'europesenken';
+            l.textContent = 'laritovski.ru/europesenken';
             e.appendChild(l)
 
             element.children[0].appendChild(e)

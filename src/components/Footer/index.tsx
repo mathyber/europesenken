@@ -7,8 +7,7 @@ interface FooterData {
 const Footer: FC<FooterData> = ({namePage}) => {
     return (
         <footer className='data-block footer'>
-            <div>Created by <a href='https://github.com/mathyber'>@mathyber</a></div>
-            <a href='https://github.com/mathyber/europesenken'>Project on GitHub</a>
+            <div>Created by <a target="_blank" href='https://youtube.com/@laritovski' >Laritovski</a></div>
         </footer>
     );
 };

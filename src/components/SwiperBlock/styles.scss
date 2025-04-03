@@ -28,3 +28,16 @@
     background: linear-gradient(90deg, #ff3e3e, white); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .background {
+    &_like {
+      background: -webkit-linear-gradient(90deg, #000000, #0b7300); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(90deg, #000000, #0b7300); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    &_dislike {
+      background: -webkit-linear-gradient(90deg, #790000, #000000); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(90deg, #790000, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+  }
+}

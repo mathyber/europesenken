@@ -39,8 +39,8 @@ body {
 }
 
 .gradient {
-  background: -webkit-linear-gradient(153deg, #0400ff, #ff00c3); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(153deg, #0400ff, #ff00c3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: -webkit-linear-gradient(153deg, #000000, #ff0000); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(153deg, #000000, #ff0000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .btn {
@@ -51,7 +51,7 @@ body {
   color: white !important;
   cursor: pointer;
   &:hover {
-    background: #ff00c3;
+    background: #ff0000;
   }
 }
 
@@ -96,6 +96,17 @@ body {
   }
 
   .label-txt {
+    color: gray;
     font-size: 50px !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: black;
+    color: white;
+  }
+  .label-txt {
+    color: white;
   }
 }
