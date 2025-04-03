@@ -9,7 +9,7 @@ const Start: FC<StartProps> = ({play}) => {
     return (
         <div className='start'>
             <div>
-                Hello! Are you ready to rate the songs of Eurovision 2023?
+                Hello! Are you ready to rate the songs of Eurovision 2025?
                 Now you will hear excerpts of all 37 contest
                 songs in a random order. Swipe right if you
                 like the song and left if you don't. Press Play to start!
