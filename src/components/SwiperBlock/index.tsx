@@ -119,13 +119,12 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
     };
 
     const classByElemLiked = (): string => {
-        if (elemLiked) return 'b_like';
-        else if (elemLiked === false) return 'b_dislike';
+        if (elemLiked) return 'background_like';
+        else if (elemLiked === false) return 'background_dislike';
         else return ''
     }
 
     const setClassInBody = () => {
-        console.log('TEST')
         // @ts-ignore
         document.querySelector('#root').className = classByElemLiked()
     }
