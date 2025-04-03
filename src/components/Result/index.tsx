@@ -37,7 +37,7 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             gaElems = element.getElementsByClassName('res-btn');
             gaElems[0]?.remove();
             const el = element.getElementsByClassName('label-txt')[0];
-            el.textContent = 'I liked these songs of Eurovision 2023:';
+            el.textContent = 'I liked these songs of Eurovision 2025:';
             let e = document.createElement('div');
             e.textContent = APP_NAME + ' by @mathyber';
             e.style.fontSize = '40px'
@@ -76,7 +76,7 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
     return (
         <div className='result' id='result'>
             <div className='label-txt'>
-                {!songs.length ? 'You didn\'t like any of the Eurovision 2023 songs :(' : 'You liked:'}
+                {!songs.length ? 'You didn\'t like any of the Eurovision 2025 songs :(' : 'You liked:'}
             </div>
             <div className='result__songs'>
                 {

@@ -38,263 +38,41 @@ import audio36 from '../audio/36.mp3';
 import audio37 from '../audio/37.mp3';
 
 export const songsArray: ISongData[] = [
-    {
-        id: 1,
-        artist: 'Albina & Familja Kelmendi',
-        name: 'Duje',
-        country: 'Albania',
-        audio: audio1
-    },
-    {
-        id: 2,
-        artist: 'Brunette',
-        name: 'Future Lover',
-        country: 'Armenia',
-        audio: audio2
-    },
-    {
-        id: 3,
-        artist: 'Voyager',
-        name: 'Promise',
-        country: 'Australia',
-        audio: audio3
-    },
-    {
-        id: 4,
-        artist: 'Teya & Salena',
-        name: 'Who The Hell Is Edgar?',
-        country: 'Austria',
-        audio: audio4
-    },
-    {
-        id: 5,
-        artist: 'TuralTuranX',
-        name: 'Tell Me More',
-        country: 'Azerbaijan',
-        audio: audio5
-    },
-    {
-        id: 6,
-        artist: 'Gustaph',
-        name: 'Because Of You',
-        country: 'Belgium',
-        audio: audio6
-    },
-    {
-        id: 7,
-        artist: 'Let 3',
-        name: 'Mama ŠČ!',
-        country: 'Croatia',
-        audio: audio7
-    },
-    {
-        id: 8,
-        artist: 'Andrew Lambrou',
-        name: 'Break A Broken Heart',
-        country: 'Cyprus',
-        audio: audio8
-    },
-    {
-        id: 9,
-        artist: 'Vesna',
-        name: 'My Sister’s Crown',
-        country: 'Czechia',
-        audio: audio9
-    },
-    {
-        id: 10,
-        artist: 'Reiley',
-        name: 'Breaking My Heart',
-        country: 'Denmark',
-        audio: audio10
-    },
-    {
-        id: 11,
-        artist: 'Alika',
-        name: 'Bridges',
-        country: 'Estonia',
-        audio: audio11
-    },
-    {
-        id: 12,
-        artist: 'Käärijä',
-        name: 'Cha Cha Cha',
-        country: 'Finland',
-        audio: audio12
-    },
-    {
-        id: 13,
-        artist: 'La Zarra',
-        name: 'Évidemment',
-        country: 'France',
-        audio: audio13
-    },
-    {
-        id: 14,
-        artist: 'Iru',
-        name: 'Echo',
-        country: 'Georgia',
-        audio: audio14
-    },
-    {
-        id: 15,
-        artist: 'Lord of the Lost',
-        name: 'Blood & Glitter',
-        country: 'Germany',
-        audio: audio15
-    },
-    {
-        id: 16,
-        artist: 'Victor Vernicos',
-        name: 'What They Say',
-        country: 'Greece',
-        audio: audio16
-    },
-    {
-        id: 17,
-        artist: 'Diljá',
-        name: 'Power',
-        country: 'Iceland',
-        audio: audio17
-    },
-    {
-        id: 18,
-        artist: 'Wild Youth',
-        name: 'We Are One',
-        country: 'Ireland',
-        audio: audio18
-    },
-    {
-        id: 19,
-        artist: 'Noa Kirel',
-        name: 'Unicorn',
-        country: 'Israel',
-        audio: audio19
-    },
-    {
-        id: 20,
-        artist: 'Marco Mengoni',
-        name: 'Due Vite',
-        country: 'Italy',
-        audio: audio20
-    },
-    {
-        id: 21,
-        artist: 'Sudden Lights',
-        name: 'Aijā',
-        country: 'Latvia',
-        audio: audio21
-    },
-    {
-        id: 22,
-        artist: 'Monika Linkytė',
-        name: 'Stay',
-        country: 'Lithuania',
-        audio: audio22
-    },
-    {
-        id: 23,
-        artist: 'The Busker',
-        name: 'Dance (Our Own Party)',
-        country: 'Malta',
-        audio: audio23
-    },
-    {
-        id: 24,
-        artist: 'Pasha Parfeni',
-        name: 'Soarele şi Luna',
-        country: 'Moldova',
-        audio: audio24
-    },
-    {
-        id: 25,
-        artist: 'Mia Nicolai & Dion Cooper',
-        name: 'Burning Daylight',
-        country: 'Netherlands',
-        audio: audio25
-    },
-    {
-        id: 26,
-        artist: 'Alessandra',
-        name: 'Queen of Kings',
-        country: 'Norway',
-        audio: audio26
-    },
-    {
-        id: 27,
-        artist: 'Blanka',
-        name: 'Solo',
-        country: 'Poland',
-        audio: audio27
-    },
-    {
-        id: 28,
-        artist: 'Mimicat',
-        name: 'Ai Coração',
-        country: 'Portugal',
-        audio: audio28
-    },
-    {
-        id: 29,
-        artist: 'Theodor Andrei',
-        name: 'D.G.T. (Off and On)',
-        country: 'Romania',
-        audio: audio29
-    },
-    {
-        id: 30,
-        artist: 'Piqued Jacks',
-        name: 'Like An Animal',
-        country: 'San Marino',
-        audio: audio30
-    },
-    {
-        id: 31,
-        artist: 'Luke Black',
-        name: 'Samo Mi Se Spava',
-        country: 'Serbia',
-        audio: audio31
-    },
-    {
-        id: 32,
-        artist: 'Joker Out',
-        name: 'Carpe Diem',
-        country: 'Slovenia',
-        audio: audio32
-    },
-    {
-        id: 33,
-        artist: 'Blanca Paloma',
-        name: 'Eaea',
-        country: 'Spain',
-        audio: audio33
-    },
-    {
-        id: 34,
-        artist: 'Loreen',
-        name: 'Tattoo',
-        country: 'Sweden',
-        audio: audio34
-    },
-    {
-        id: 35,
-        artist: 'Remo Forrer',
-        name: 'Watergun',
-        country: 'Switzerland',
-        audio: audio35
-    },
-    {
-        id: 36,
-        artist: 'TVORCHI',
-        name: 'Heart of Steel',
-        country: 'Ukraine',
-        audio: audio36
-    },
-    {
-        id: 37,
-        artist: 'Mae Muller',
-        name: 'I Wrote A Song',
-        country: 'United Kingdom',
-        audio: audio37
-    }
-]
+    {id: 1, artist: 'Shkodra Elektronike', name: 'Zjerm', country: 'Albania', audio: audio1},
+    {id: 2, artist: 'PARG', name: 'SURVIVOR', country: 'Armenia', audio: audio2},
+    {id: 3, artist: 'Go-Jo', name: 'Milkshake Man', country: 'Australia', audio: audio3},
+    {id: 4, artist: 'JJ', name: 'Wasted Love', country: 'Austria', audio: audio4},
+    {id: 5, artist: 'Mamagama', name: 'Run With U', country: 'Azerbaijan', audio: audio5},
+    {id: 6, artist: 'Red Sebastian', name: 'Strobe Lights', country: 'Belgium', audio: audio6},
+    {id: 7, artist: 'Marko Bošnjak', name: 'Poison Cake', country: 'Croatia', audio: audio7},
+    {id: 8, artist: 'Theo Evan', name: 'Shh', country: 'Cyprus', audio: audio8},
+    {id: 9, artist: 'ADONXS', name: 'Kiss Kiss Goodbye', country: 'Czechia', audio: audio9},
+    {id: 10, artist: 'Sissal', name: 'Hallucination', country: 'Denmark', audio: audio10},
+    {id: 11, artist: 'Tommy Cash', name: 'Espresso Macchiato', country: 'Estonia', audio: audio11},
+    {id: 12, artist: 'Erika Vikman', name: 'ICH KOMME', country: 'Finland', audio: audio12},
+    {id: 13, artist: 'Louane', name: 'Maman', country: 'France', audio: audio13},
+    {id: 14, artist: 'Mariam Shengelia', name: 'Freedom', country: 'Georgia', audio: audio14},
+    {id: 15, artist: 'Abor & Tynna', name: 'Baller', country: 'Germany', audio: audio15},
+    {id: 16, artist: 'Klavdía', name: 'Asteromáta', country: 'Greece', audio: audio16},
+    {id: 17, artist: 'VÆB', name: 'RÓA', country: 'Iceland', audio: audio17},
+    {id: 18, artist: 'EMMY', name: 'Laika Party', country: 'Ireland', audio: audio18},
+    {id: 19, artist: 'Yuval Raphael', name: 'New Day Will Rise', country: 'Israel', audio: audio19},
+    {id: 20, artist: 'Lucio Corsi', name: 'Volevo Essere Un Duro', country: 'Italy', audio: audio20},
+    {id: 21, artist: 'Tautumeitas', name: 'Bur Man Laimi', country: 'Latvia', audio: audio21},
+    {id: 22, artist: 'Katarsis', name: 'Tavo Akys', country: 'Lithuania', audio: audio22},
+    {id: 23, artist: 'Laura Thorn', name: 'La Poupée Monte Le Son', country: 'Luxembourg', audio: audio23},
+    {id: 24, artist: 'Miriana Conte', name: 'Serving', country: 'Malta', audio: audio24},
+    {id: 25, artist: 'Nina Žižić', name: 'Dobrodošli', country: 'Montenegro', audio: audio25},
+    {id: 26, artist: 'Claude', name: 'C\'est La Vie', country: 'Netherlands', audio: audio26},
+    {id: 27, artist: 'Kyle Alessandro', name: 'Lighter', country: 'Norway', audio: audio27},
+    {id: 28, artist: 'Justyna Steczkowska', name: 'GAJA', country: 'Poland', audio: audio28},
+    {id: 29, artist: 'NAPA', name: 'Deslocado', country: 'Portugal', audio: audio29},
+    {id: 30, artist: 'Gabry Ponte', name: 'Tutta L\'Italia', country: 'San Marino', audio: audio30},
+    {id: 31, artist: 'Princ', name: 'Mila', country: 'Serbia', audio: audio31},
+    {id: 32, artist: 'Klemen', name: 'How Much Time Do We Have Left', country: 'Slovenia', audio: audio32},
+    {id: 33, artist: 'Melody', name: 'ESA DIVA', country: 'Spain', audio: audio33},
+    {id: 34, artist: 'KAJ', name: 'Bara Bada Bastu', country: 'Sweden', audio: audio34},
+    {id: 35, artist: 'Zoë Më', name: 'Voyage', country: 'Switzerland', audio: audio35},
+    {id: 36, artist: 'Ziferblat', name: 'Bird of Pray', country: 'Ukraine', audio: audio36},
+    {id: 37, artist: 'Remember Monday', name: 'What The Hell Just Happened?', country: 'United Kingdom', audio: audio37}
+];
