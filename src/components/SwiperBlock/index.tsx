@@ -26,18 +26,20 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
     const [elemLiked, setElemLiked] = useState<boolean | null>(null)
     const [globalPlay, setGlobalPlay] = useState<boolean>(false);
     const [play, setPlay] = useState<boolean>(false);
-    const [audio, setAudio] = useState<HTMLAudioElement | null>(null)
+    const [audio] = useState<HTMLAudioElement>(() => document.createElement('audio'));
 
     useEffect(() => {
-        audio?.pause();
-        let newAudio: HTMLAudioElement | null = null;
-        if (allSongs[0]?.audio) {
-            newAudio = document.createElement('audio');
-            newAudio.src = allSongs[0].audio?.toString();
-            newAudio.volume = volume;
+        if (audio) {
+            audio.pause();
+            audio.src = '';
         }
-
-        setAudio(newAudio);
+        if (allSongs[0]?.audio) {
+            audio.src = allSongs[0].audio.toString();
+            audio.volume = volume;
+            if (play) {
+                audio.play().catch((error) => console.error(error));
+            }
+        }
     }, [allSongs, volume]);
 
     useEffect(() => {
@@ -136,7 +138,7 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
     }, [elemLiked])
 
     useEffect(() => {
-        globalPlay && setPlay(true);
+        (globalPlay && !play) && setPlay(true);
     }, [globalPlay]);
 
     return (
