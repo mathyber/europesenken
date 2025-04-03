@@ -45,13 +45,21 @@ function getDistance(color1: RGBColor, color2: RGBColor): number {
 }
 
 export const screenElement = (block: HTMLElement) => {
-    html2canvas(block).then(canvas => {
-        let downloadLink = document.createElement('a');
-        let dataURL = canvas.toDataURL('image/png');
-        let url = dataURL.replace(/^data:image\/png/,'data:application/octet-stream');
-        downloadLink.setAttribute('href', url);
-        downloadLink.setAttribute('download', `${APP_NAME}.png`);
-        downloadLink.click();
-        block.remove();
-    })
+    setTimeout(() => {
+        html2canvas(block, { scale: 2 }).then(canvas => {
+            canvas.toBlob(blob => {
+                if (blob) {
+                    const url = URL.createObjectURL(blob);
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = url;
+                    downloadLink.download = `${APP_NAME}.png`;
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                    URL.revokeObjectURL(url);
+                }
+                block.remove();
+            }, 'image/png');
+        }).catch(error => console.error("Ошибка html2canvas:", error));
+    }, 100);
 }
