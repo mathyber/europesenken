@@ -125,6 +125,7 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
     }
 
     const setClassInBody = () => {
+        console.log('TEST')
         // @ts-ignore
         document.querySelector('#root').className = classByElemLiked()
     }
