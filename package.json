@@ -45,5 +45,10 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^6.2.4"
-  }
+  },
+  "description": "Europesenken - a site where you can rate the songs of Eurovision 2025 in Tinder format by swiping cards",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
