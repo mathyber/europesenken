@@ -6,6 +6,7 @@ export default defineConfig({
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
+    base: '/europesenken/',
     build: {
         outDir: 'dist'
     }
