@@ -53,7 +53,7 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             element.style.justifyContent = 'center'
 
             //To hide the element from the screen
-            element.style.top = '-5555px'
+            element.style.left = '-5555px'
             element.style.position = 'absolute'
         }
         screenElement(element);
