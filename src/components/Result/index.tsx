@@ -77,7 +77,6 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
     }
 
     const handleSendData = () => {
-        console.log('TEST', telegram, user)
         const data = {
             message: `Привет от ${user?.first_name || 'неизвестного'}!`,
             userId: user?.id || 'unknown',
