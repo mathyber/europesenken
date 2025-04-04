@@ -60,6 +60,6 @@ export const screenElement = (block: HTMLElement) => {
                 }
                 block.remove();
             }, 'image/png');
-        }).catch(error => console.error("Ошибка html2canvas:", error));
+        }).catch(error => console.error(error));
     }, 100);
 }
