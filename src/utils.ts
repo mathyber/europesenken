@@ -44,24 +44,19 @@ function getDistance(color1: RGBColor, color2: RGBColor): number {
     ) || 0;
 }
 
-export const screenElement = (block: HTMLElement, blobFunc?: false | ((url: string) => void)) => {
+export const screenElement = (block: HTMLElement) => {
     setTimeout(() => {
-        html2canvas(block, { scale: blobFunc ? 1 : 2 }).then(canvas => {
+        html2canvas(block, { scale: 2 }).then(canvas => {
             canvas.toBlob(blob => {
                 if (blob) {
                     const url = URL.createObjectURL(blob);
-                    if (!!blobFunc) {
-                        // @ts-ignore
-                        blobFunc(url);
-                    } else {
-                        const downloadLink = document.createElement('a');
-                        downloadLink.href = url;
-                        downloadLink.download = `${APP_NAME}.png`;
-                        document.body.appendChild(downloadLink);
-                        downloadLink.click();
-                        document.body.removeChild(downloadLink);
-                        URL.revokeObjectURL(url);
-                    }
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = url;
+                    downloadLink.download = `${APP_NAME}.png`;
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                    URL.revokeObjectURL(url);
                 }
                 block.remove();
             }, 'image/png');
