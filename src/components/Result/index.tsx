@@ -14,6 +14,17 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
     const [playId, setPlayId] = useState<number | null>(null);
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
 
+    const {telegram, user, isTelegram} = useTelegram();
+
+    const handleSendData = (url: string):void => {
+        console.log(url)
+        const data = {
+            message: url,
+            userId: user?.id || 'unknown',
+        };
+        telegram.sendData(JSON.stringify(data));
+    };
+
     const createImg = () => {
         const resultEl = document.getElementById('result');
         const el = (resultEl as HTMLElement).cloneNode(true);
@@ -58,7 +69,7 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             element.style.left = '-5555px'
             element.style.position = 'absolute'
         }
-        screenElement(element);
+        screenElement(element, isTelegram && handleSendData);
     }
     const play = (id: number, audioFile: any) => {
         setPlayId(id);
@@ -74,16 +85,6 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             newAudio.play();
         }
     }
-
-    const {telegram, user, isTelegram} = useTelegram();
-
-    const handleSendData = () => {
-        const data = {
-            message: `Привет от ${user?.first_name}!`,
-            userId: user?.id || 'unknown',
-        };
-        telegram.sendData(JSON.stringify(data));
-    };
 
     return (
         <div className='result' id='result'>
@@ -110,15 +111,9 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             {songs.length ? <div className='res-btn'>
                 Share the results with your friends!
                 <div>
-                    {
-                        !isTelegram
-                            ? <button className='btn gradient' onClick={createImg}>
-                                download image file
-                            </button>
-                            : <button className='btn gradient' onClick={handleSendData}>
-                                TG
-                            </button>
-                    }
+                    <button className='btn gradient' onClick={createImg}>
+                        {!isTelegram ? `download image file` : 'TG'}
+                    </button>
                 </div>
             </div> : null}
         </div>
