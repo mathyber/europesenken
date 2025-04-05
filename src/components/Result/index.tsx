@@ -3,6 +3,7 @@ import './styles.scss';
 import {ISongWithAddParams} from "../../types/types";
 import {screenElement} from "../../utils";
 import {APP_NAME} from "../../constants/appSettings";
+import {useTelegram} from "../../TelegramContext";
 
 interface ResultProps {
     songs: ISongWithAddParams[],
@@ -23,7 +24,7 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
         if (element) {
             element.style.width = '5644px';
             if (element.getBoundingClientRect().height < element.getBoundingClientRect().width) {
-                if (songs.length < 5) element.style.height = `${1300+(100*songs.length)}px`;
+                if (songs.length < 5) element.style.height = `${1300 + (100 * songs.length)}px`;
 
                 while ((element.getBoundingClientRect().height + 150) < element.getBoundingClientRect().width) {
                     element.style.width = `${element.getBoundingClientRect().width - 1}px`
@@ -74,6 +75,16 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
         }
     }
 
+    const {telegram, user, isTelegram} = useTelegram();
+
+    const handleSendData = () => {
+        const data = {
+            message: `Привет от ${user?.first_name}!`,
+            userId: user?.id || 'unknown',
+        };
+        telegram.sendData(JSON.stringify(data));
+    };
+
     return (
         <div className='result' id='result'>
             <div className='label-txt'>
@@ -81,7 +92,7 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             </div>
             <div className='result__songs'>
                 {
-                     songs.map(song => {
+                    songs.map(song => {
                         return <div
                             onClick={() => play(song.id, song.audio)}
                             className={`result__song ${playId === song.id ? 'gradient-animation' : ''}`}
@@ -99,9 +110,15 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             {songs.length ? <div className='res-btn'>
                 Share the results with your friends!
                 <div>
-                    <button className='btn gradient' onClick={createImg}>
-                        download image file
-                    </button>
+                    {
+                        !isTelegram
+                            ? <button className='btn gradient' onClick={createImg}>
+                                download image file
+                            </button>
+                            : <button className='btn gradient' onClick={handleSendData}>
+                                TG
+                            </button>
+                    }
                 </div>
             </div> : null}
         </div>
