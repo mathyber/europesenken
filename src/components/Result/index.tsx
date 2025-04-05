@@ -3,7 +3,6 @@ import './styles.scss';
 import {ISongWithAddParams} from "../../types/types";
 import {screenElement} from "../../utils";
 import {APP_NAME} from "../../constants/appSettings";
-import {useTelegram} from "../../TelegramContext";
 
 interface ResultProps {
     songs: ISongWithAddParams[],
@@ -13,7 +12,6 @@ interface ResultProps {
 const Result: FC<ResultProps> = ({songs, volume}) => {
     const [playId, setPlayId] = useState<number | null>(null);
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
-    const { telegram, user, isTelegram } = useTelegram();
 
     const createImg = () => {
         const resultEl = document.getElementById('result');
@@ -76,14 +74,6 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
         }
     }
 
-    const handleSendData = () => {
-        const data = {
-            message: `Привет от ${user?.first_name || 'неизвестного'}!`,
-            userId: user?.id || 'unknown',
-        };
-        telegram.sendData(JSON.stringify(data));
-    };
-
     return (
         <div className='result' id='result'>
             <div className='label-txt'>
@@ -108,15 +98,11 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             </div>
             {songs.length ? <div className='res-btn'>
                 Share the results with your friends!
-                {!isTelegram ? <div>
+                <div>
                     <button className='btn gradient' onClick={createImg}>
                         download image file
                     </button>
-                </div> : <div>
-                    <button className='btn gradient' onClick={handleSendData}>
-                        back to TG
-                    </button>
-                </div>}
+                </div>
             </div> : null}
         </div>
     );
