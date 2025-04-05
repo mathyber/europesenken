@@ -79,7 +79,7 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
 
     const handleSendData = () => {
         const data = {
-            songs,
+            songs: songs?.map(s => ({audio: s.audio, id: s.id})),
             userId: user?.id || 'unknown',
         };
         telegram.sendData(JSON.stringify(data));
