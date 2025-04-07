@@ -12,8 +12,10 @@ interface ResultProps {
 const Result: FC<ResultProps> = ({songs, volume}) => {
     const [playId, setPlayId] = useState<number | null>(null);
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const createImg = () => {
+        setLoading(true);
         const resultEl = document.getElementById('result');
         const el = (resultEl as HTMLElement).cloneNode(true);
         const element = document.body.appendChild(document.createElement('div')) as HTMLElement;
@@ -23,7 +25,7 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
         if (element) {
             element.style.width = '5644px';
             if (element.getBoundingClientRect().height < element.getBoundingClientRect().width) {
-                if (songs.length < 5) element.style.height = `${1300+(100*songs.length)}px`;
+                if (songs.length < 5) element.style.height = `${1300 + (100 * songs.length)}px`;
 
                 while ((element.getBoundingClientRect().height + 150) < element.getBoundingClientRect().width) {
                     element.style.width = `${element.getBoundingClientRect().width - 1}px`
@@ -57,8 +59,9 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             element.style.left = '-5555px'
             element.style.position = 'absolute'
         }
-        screenElement(element);
+        screenElement(element, () => setLoading(false));
     }
+
     const play = (id: number, audioFile: any) => {
         setPlayId(id);
         if (id === playId) {
@@ -99,8 +102,16 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             {songs.length ? <div className='res-btn'>
                 Share the results with your friends!
                 <div>
-                    <button className='btn gradient' onClick={createImg}>
-                        download image file
+                    <button
+                        disabled={loading}
+                        className='btn gradient'
+                        onClick={createImg}
+                    >
+                        {
+                            !loading
+                                ? 'download image file'
+                                : <div className="loader"></div>
+                        }
                     </button>
                 </div>
             </div> : null}

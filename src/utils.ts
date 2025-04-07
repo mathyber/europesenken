@@ -44,7 +44,7 @@ function getDistance(color1: RGBColor, color2: RGBColor): number {
     ) || 0;
 }
 
-export const screenElement = (block: HTMLElement) => {
+export const screenElement = (block: HTMLElement, callback?: () => any) => {
     setTimeout(() => {
         html2canvas(block, { scale: 2 }).then(canvas => {
             canvas.toBlob(blob => {
@@ -59,7 +59,11 @@ export const screenElement = (block: HTMLElement) => {
                     URL.revokeObjectURL(url);
                 }
                 block.remove();
+                callback && callback();
             }, 'image/png');
-        }).catch(error => console.error(error));
+        }).catch(error => {
+            callback && callback();
+            console.error(error);
+        });
     }, 100);
 }
