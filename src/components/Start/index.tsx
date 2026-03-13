@@ -9,8 +9,8 @@ const Start: FC<StartProps> = ({play}) => {
     return (
         <div className='start'>
             <div>
-                Hello! Are you ready to rate the songs of Eurovision 2025?
-                Now you will hear excerpts of all 37 contest
+                Hello! Are you ready to rate the songs of Eurovision 2026?
+                Now you will hear excerpts of all 35 contest
                 songs in a random order. Swipe right if you
                 like the song and left if you don't. Press Play to start!
             </div>
