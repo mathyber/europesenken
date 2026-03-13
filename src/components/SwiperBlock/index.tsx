@@ -3,8 +3,7 @@ import './styles.scss';
 import {ISongData, ISongWithAddParams} from "../../types/types";
 import Card from "../Card";
 import Result from "../Result";
-import {getRandomContrastColor, shuffleArray} from "../../utils";
-import {debounce} from 'lodash';
+import {debounce, getRandomContrastColor, shuffleArray} from "../../utils";
 import Start from "../Start";
 
 interface SwiperBlockProps {
