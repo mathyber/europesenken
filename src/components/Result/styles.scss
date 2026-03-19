@@ -23,6 +23,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 24px;
   }
 
   &__song {
@@ -52,4 +53,41 @@
       font-size: 19px;
     }
   }
+}
+
+.vote-block {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.vote-status {
+  margin: 5px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.vote-success {
+  opacity: 0.7;
+}
+
+.vote-link {
+  margin-left: 4px;
+  color: #ff78e9;
+  text-decoration: none;
+}
+
+.vote-error {
+  opacity: 0.6;
+}
+
+.vote-retry {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  padding: 0;
+  font-weight: bold;
 }

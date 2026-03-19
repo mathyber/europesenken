@@ -11,3 +11,14 @@ export interface ISongWithAddParams extends ISongData {
     color2: string,
     number: number
 }
+
+export interface ScoreboardEntry {
+    song_id: number;
+    likes_count: number;
+    percentage: number;
+}
+
+export interface ScoreboardRow extends ISongData {
+    likes_count: number;
+    percentage: number;
+}
