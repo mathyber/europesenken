@@ -4,6 +4,8 @@ import './styles.scss';
 import {ScoreboardRow} from '../../types/types';
 import {fetchScoreboard, fetchTotalVoters} from '../../lib/api';
 import {songsArray} from '../../constants/songs';
+import {countryFlags} from '../../constants/countryFlags';
+import Flag from '../Flag';
 
 type LoadStatus = 'loading' | 'success' | 'error';
 
@@ -77,7 +79,10 @@ const Scoreboard: FC = () => {
                                 <span className="scoreboard__position">#{index + 1}</span>
                                 <div className="scoreboard__info">
                                     <div className="scoreboard__song">{row.artist} — <b>{row.name}</b></div>
-                                    <div className="scoreboard__country">{row.country}</div>
+                                    <div className="scoreboard__country">
+                                        <Flag emoji={countryFlags[row.country]} size={13} />
+                                        {row.country}
+                                    </div>
                                     <div className="scoreboard__bar">
                                         <div
                                             className="scoreboard__bar-fill"

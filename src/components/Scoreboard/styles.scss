@@ -83,6 +83,9 @@
   }
 
   &__country {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     font-size: 12px;
     opacity: 0.6;
     margin-top: 2px;
