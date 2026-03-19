@@ -23,6 +23,11 @@
 
   &:hover {
     opacity: 1;
-    text-decoration: underline;
+  }
+
+  &_home {
+    font-size: 24px;
+    font-weight: 600;
+    opacity: 1;
   }
 }

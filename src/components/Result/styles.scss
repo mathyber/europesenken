@@ -55,21 +55,26 @@
 }
 
 .vote-block {
-  margin-top: 20px;
+  margin-top: 16px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
+}
+
+.vote-status {
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  font-size: 13px;
+  opacity: 0.6;
 }
 
 .vote-success {
-  font-size: 16px;
+  opacity: 0.7;
 }
 
 .vote-link {
   color: #f800cf;
   text-decoration: none;
+  opacity: 1;
 
   &:hover {
     text-decoration: underline;
@@ -77,6 +82,16 @@
 }
 
 .vote-error {
-  font-size: 14px;
-  opacity: 0.8;
+  opacity: 0.6;
+}
+
+.vote-retry {
+  background: none;
+  border: none;
+  color: #f800cf;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  padding: 0;
+  text-decoration: underline;
 }

@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import './styles.scss';
 import {ISongWithAddParams} from "../../types/types";
@@ -92,6 +92,10 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
         }
     };
 
+    useEffect(() => {
+        if (songs.length > 0) handleVote();
+    }, []);
+
     return (
         <div className='result' id='result'>
             <div className='label-txt'>
@@ -129,29 +133,27 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
                         }
                     </button>
                 </div>
-            </div> : null}
-            {songs.length > 0 && (
+
                 <div className='vote-block'>
-                    {voteStatus === 'idle' && (
-                        <button className='btn gradient' onClick={handleVote}>
-                            Vote for global scoreboard
-                        </button>
+                    {voteStatus === 'loading' && (
+                        <div className='vote-status'>
+                            <div className="loader" /> Saving to global scoreboard...
+                        </div>
                     )}
-                    {voteStatus === 'loading' && <div className="loader" />}
                     {voteStatus === 'success' && (
-                        <div className='vote-success'>
-                            Your vote is counted!{' '}
-                            <Link to="/scoreboard" className='vote-link'>See global scoreboard →</Link>
+                        <div className='vote-status vote-success'>
+                            Saved to scoreboard!{' '}
+                            <Link to="/scoreboard" className='vote-link'>See results →</Link>
                         </div>
                     )}
                     {voteStatus === 'error' && (
-                        <div className='vote-error'>
-                            Something went wrong.{' '}
-                            <button className='btn gradient' onClick={handleVote}>Try again</button>
+                        <div className='vote-status vote-error'>
+                            Couldn't save.{' '}
+                            <button className='vote-retry' onClick={handleVote}>Retry</button>
                         </div>
                     )}
                 </div>
-            )}
+            </div> : null}
         </div>
     );
 };
