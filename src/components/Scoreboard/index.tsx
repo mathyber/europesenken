@@ -78,7 +78,7 @@ const Scoreboard: FC = () => {
                             <div className="scoreboard__row" key={row.id}>
                                 <span className="scoreboard__position">#{index + 1}</span>
                                 <div className="scoreboard__info">
-                                    <div className="scoreboard__song">{row.artist} — <b>{row.name}</b></div>
+                                    <div className="scoreboard__song">{row.artist} · <b>{row.name}</b></div>
                                     <div className="scoreboard__country">
                                         <Flag emoji={countryFlags[row.country]} size={13} />
                                         {row.country}
