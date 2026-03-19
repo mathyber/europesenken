@@ -77,23 +77,10 @@ serve(async (req) => {
     Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
   );
 
-  // --- Anti-cheat: check if another token voted from this IP in the last hour ---
-  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
-  const { data: sameIpVote } = await supabase
-    .from('votes')
-    .select('voter_token')
-    .eq('ip_hash', ipHash)
-    .neq('voter_token', voter_token)
-    .gte('updated_at', oneHourAgo)
-    .maybeSingle();
-
-  // Use the existing token from same IP if found (overwrite its vote)
-  const targetToken: string = sameIpVote ? sameIpVote.voter_token : voter_token;
-
-  // --- UPSERT ---
+  // --- UPSERT: один voter_token = один голос, повтор перезаписывает ---
   const { error: upsertError } = await supabase.from('votes').upsert(
     {
-      voter_token: targetToken,
+      voter_token,
       liked_song_ids,
       ip_hash: ipHash,
       updated_at: new Date().toISOString(),
