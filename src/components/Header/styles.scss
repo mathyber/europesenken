@@ -17,6 +17,7 @@
     grid-column: 3;
     text-align: right;
   }
+
 }
 
 .header__link {
@@ -34,5 +35,20 @@
     font-size: 24px;
     font-weight: 600;
     opacity: 1;
+  }
+}
+
+.header__link-text {
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+.header__link-icon {
+  display: none;
+  font-size: 24px;
+
+  @media (max-width: 480px) {
+    display: block;
   }
 }
