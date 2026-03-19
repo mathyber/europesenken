@@ -134,6 +134,10 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
 
     useEffect(() => {
         setClassInBodyDebounce();
+        return () => {
+            const root = document.querySelector('#root');
+            if (root) root.className = '';
+        };
     }, [elemLiked])
 
     useEffect(() => {

@@ -1,8 +1,11 @@
 import React, {FC, useState} from 'react';
+import { Link } from 'react-router-dom';
 import './styles.scss';
 import {ISongWithAddParams} from "../../types/types";
 import {screenElement} from "../../utils";
 import {APP_NAME} from "../../constants/appSettings";
+import {getVoterToken} from "../../lib/voter";
+import {submitVote} from "../../lib/api";
 
 interface ResultProps {
     songs: ISongWithAddParams[],
@@ -13,6 +16,7 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
     const [playId, setPlayId] = useState<number | null>(null);
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
+    const [voteStatus, setVoteStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
     const createImg = () => {
         setLoading(true);
@@ -62,7 +66,7 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
         screenElement(element, () => setLoading(false));
     }
 
-    const play = (id: number, audioFile: any) => {
+    const play = (id: number, audioFile: object | undefined) => {
         setPlayId(id);
         if (id === playId) {
             audio?.pause();
@@ -76,6 +80,17 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
             newAudio.play();
         }
     }
+
+    const handleVote = async () => {
+        setVoteStatus('loading');
+        try {
+            const voterToken = await getVoterToken();
+            await submitVote(voterToken, songs.map(s => s.id));
+            setVoteStatus('success');
+        } catch {
+            setVoteStatus('error');
+        }
+    };
 
     return (
         <div className='result' id='result'>
@@ -115,6 +130,28 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
                     </button>
                 </div>
             </div> : null}
+            {songs.length > 0 && (
+                <div className='vote-block'>
+                    {voteStatus === 'idle' && (
+                        <button className='btn gradient' onClick={handleVote}>
+                            Vote for global scoreboard
+                        </button>
+                    )}
+                    {voteStatus === 'loading' && <div className="loader" />}
+                    {voteStatus === 'success' && (
+                        <div className='vote-success'>
+                            Your vote is counted!{' '}
+                            <Link to="/scoreboard" className='vote-link'>See global scoreboard →</Link>
+                        </div>
+                    )}
+                    {voteStatus === 'error' && (
+                        <div className='vote-error'>
+                            Something went wrong.{' '}
+                            <button className='btn gradient' onClick={handleVote}>Try again</button>
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 };

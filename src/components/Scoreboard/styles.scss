@@ -1,0 +1,163 @@
+.scoreboard {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 24px;
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+  }
+
+  &__meta {
+    font-size: 14px;
+    opacity: 0.7;
+    margin-bottom: 12px;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  &__back {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.85;
+
+    &:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+  }
+
+  &__loader {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  &__error {
+    text-align: center;
+    padding: 40px;
+    opacity: 0.8;
+  }
+
+  &__empty {
+    text-align: center;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    opacity: 0.7;
+
+    a {
+      color: #f800cf;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: rgba(128, 128, 128, 0.1);
+    gap: 12px;
+  }
+
+  &__position {
+    font-weight: bold;
+    min-width: 36px;
+    font-size: 16px;
+    opacity: 0.9;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__song {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__country {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-top: 2px;
+  }
+
+  &__bar {
+    height: 4px;
+    background: rgba(128, 128, 128, 0.2);
+    border-radius: 2px;
+    margin-top: 6px;
+    width: 100%;
+  }
+
+  &__bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(153deg, #f800cf, #4c00ff);
+    transition: width 0.3s ease;
+  }
+
+  &__stats {
+    text-align: right;
+    min-width: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__votes {
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  &__percent {
+    font-size: 12px;
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .scoreboard__row {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .scoreboard {
+    padding: 12px;
+  }
+
+  .scoreboard__row {
+    padding: 10px 12px;
+  }
+
+  .scoreboard__song {
+    font-size: 13px;
+  }
+}
