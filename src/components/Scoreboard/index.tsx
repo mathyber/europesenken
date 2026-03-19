@@ -47,7 +47,7 @@ const Scoreboard: FC = () => {
             <div className="scoreboard__header">
                 <h1>Global Scoreboard</h1>
                 <div className="scoreboard__meta">
-                    Eurovision 2026 · {totalVoters} people swiped
+                    Eurovision 2026{!!totalVoters && ` · ${totalVoters} people swiped`}
                 </div>
             </div>
 
