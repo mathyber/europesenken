@@ -19,26 +19,6 @@
     margin-bottom: 12px;
   }
 
-  &__actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  &__back {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    opacity: 0.85;
-
-    &:hover {
-      opacity: 1;
-      text-decoration: underline;
-    }
-  }
-
   &__loader {
     display: flex;
     justify-content: center;

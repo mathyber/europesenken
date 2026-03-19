@@ -137,19 +137,18 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
                 <div className='vote-block'>
                     {voteStatus === 'loading' && (
                         <div className='vote-status'>
-                            <div className="loader" /> Saving to global scoreboard...
+                            saving to global scoreboard...
                         </div>
                     )}
                     {voteStatus === 'success' && (
                         <div className='vote-status vote-success'>
-                            Saved to scoreboard!{' '}
-                            <Link to="/scoreboard" className='vote-link'>See results →</Link>
+                            saved to <Link to="/scoreboard" className='vote-link'>scoreboard</Link>
                         </div>
                     )}
                     {voteStatus === 'error' && (
                         <div className='vote-status vote-error'>
-                            Couldn't save.{' '}
-                            <button className='vote-retry' onClick={handleVote}>Retry</button>
+                            couldn't save.
+                            <button className='vote-retry vote-link' onClick={handleVote}>retry</button>
                         </div>
                     )}
                 </div>

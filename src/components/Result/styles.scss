@@ -23,6 +23,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 24px;
   }
 
   &__song {
@@ -60,9 +61,9 @@
 }
 
 .vote-status {
+  margin: 5px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   font-size: 13px;
   opacity: 0.6;
 }
@@ -72,13 +73,9 @@
 }
 
 .vote-link {
-  color: #f800cf;
+  margin-left: 4px;
+  color: #ff78e9;
   text-decoration: none;
-  opacity: 1;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 .vote-error {
@@ -88,10 +85,9 @@
 .vote-retry {
   background: none;
   border: none;
-  color: #f800cf;
   cursor: pointer;
   font-size: 13px;
   font-family: inherit;
   padding: 0;
-  text-decoration: underline;
+  font-weight: bold;
 }

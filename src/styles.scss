@@ -51,7 +51,7 @@ body {
   color: white !important;
   cursor: pointer;
   &:hover {
-    background: #ff0000;
+    background: #f800cf;
   }
 }
 
@@ -105,7 +105,7 @@ body {
   width: 20px;
   height: 20px;
   border: 3px solid #ffffff;
-  border-top: 3px solid #ff0000 !important;
+  border-top: 3px solid #f800cf !important;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }

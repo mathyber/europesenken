@@ -11,7 +11,6 @@ const Scoreboard: FC = () => {
     const [status, setStatus] = useState<LoadStatus>('loading');
     const [rows, setRows] = useState<ScoreboardRow[]>([]);
     const [totalVoters, setTotalVoters] = useState<number>(0);
-    const [refreshing, setRefreshing] = useState<boolean>(false);
 
     const loadData = async () => {
         try {
@@ -43,24 +42,12 @@ const Scoreboard: FC = () => {
         loadData();
     }, []);
 
-    const handleRefresh = async () => {
-        setRefreshing(true);
-        await loadData();
-        setRefreshing(false);
-    };
-
     return (
         <div className="scoreboard">
             <div className="scoreboard__header">
                 <h1>Global Scoreboard</h1>
                 <div className="scoreboard__meta">
                     Eurovision 2026 · Total voters: {totalVoters}
-                </div>
-                <div className="scoreboard__actions">
-                    <button onClick={handleRefresh} disabled={refreshing} className="btn gradient">
-                        {refreshing ? <div className="loader" /> : 'Refresh'}
-                    </button>
-                    <Link to="/" className="scoreboard__back">← Back to game</Link>
                 </div>
             </div>
 
