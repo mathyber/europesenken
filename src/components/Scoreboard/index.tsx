@@ -47,7 +47,7 @@ const Scoreboard: FC = () => {
             <div className="scoreboard__header">
                 <h1>Global Scoreboard</h1>
                 <div className="scoreboard__meta">
-                    Eurovision 2026 · Total voters: {totalVoters}
+                    Eurovision 2026 · {totalVoters} people swiped
                 </div>
             </div>
 
@@ -68,7 +68,7 @@ const Scoreboard: FC = () => {
                 <>
                     {totalVoters === 0 && (
                         <div className="scoreboard__empty">
-                            No votes yet. <Link to="/">Be the first to vote!</Link>
+                            No likes yet. <Link to="/">Be the first to swipe!</Link>
                         </div>
                     )}
                     <div className="scoreboard__list">
@@ -86,7 +86,7 @@ const Scoreboard: FC = () => {
                                     </div>
                                 </div>
                                 <div className="scoreboard__stats">
-                                    <span className="scoreboard__votes">{row.likes_count} votes</span>
+                                    <span className="scoreboard__votes">{row.likes_count} ♡</span>
                                     <span className="scoreboard__percent">{row.percentage}%</span>
                                 </div>
                             </div>
