@@ -9,10 +9,11 @@ import {submitVote} from "../../lib/api";
 
 interface ResultProps {
     songs: ISongWithAddParams[],
-    volume: number
+    volume: number,
+    sessionToken: string | null
 }
 
-const Result: FC<ResultProps> = ({songs, volume}) => {
+const Result: FC<ResultProps> = ({songs, volume, sessionToken}) => {
     const [playId, setPlayId] = useState<number | null>(null);
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -82,10 +83,11 @@ const Result: FC<ResultProps> = ({songs, volume}) => {
     }
 
     const handleVote = async () => {
+        if (!sessionToken) return;
         setVoteStatus('loading');
         try {
             const voterToken = await getVoterToken();
-            await submitVote(voterToken, songs.map(s => s.id));
+            await submitVote(voterToken, songs.map(s => s.id), sessionToken);
             setVoteStatus('success');
         } catch {
             setVoteStatus('error');

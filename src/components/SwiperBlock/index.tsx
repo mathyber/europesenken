@@ -5,6 +5,7 @@ import Card from "../Card";
 import Result from "../Result";
 import {debounce, getRandomContrastColor, shuffleArray} from "../../utils";
 import Start from "../Start";
+import {createSession} from "../../lib/api";
 
 interface SwiperBlockProps {
     songs: ISongData[],
@@ -25,6 +26,7 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
     const [elemLiked, setElemLiked] = useState<boolean | null>(null)
     const [globalPlay, setGlobalPlay] = useState<boolean>(false);
     const [play, setPlay] = useState<boolean>(false);
+    const [sessionToken, setSessionToken] = useState<string | null>(null);
     const [audio] = useState<HTMLAudioElement>(() => document.createElement('audio'));
 
     useEffect(() => {
@@ -155,10 +157,13 @@ const SwiperBlock: FC<SwiperBlockProps> = ({songs, volume}) => {
         >
             {
                 (!allSongs.length && globalPlay)
-                    ? <Result songs={likedSongs} volume={volume}/>
+                    ? <Result songs={likedSongs} volume={volume} sessionToken={sessionToken}/>
                     : (
                         !globalPlay
-                            ? <Start play={() => setGlobalPlay(true)}/>
+                            ? <Start play={() => {
+                                setGlobalPlay(true);
+                                createSession().then(setSessionToken).catch(console.error);
+                            }}/>
                             : <div className='cards'>
                                 {
                                     allSongs.slice(0, 2).map((song, index) => {
