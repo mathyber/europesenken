@@ -30,20 +30,27 @@ async function sha256hex(input: string): Promise<string> {
     .join('');
 }
 
+const MIN_SESSION_AGE_MS = 60 * 1000; // 1 минута
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
 
   // --- Parse body ---
-  let body: { voter_token?: unknown; liked_song_ids?: unknown };
+  let body: { voter_token?: unknown; liked_song_ids?: unknown; session_token?: unknown };
   try {
     body = await req.json();
   } catch {
     return err(400, 'Invalid JSON body');
   }
 
-  const { voter_token, liked_song_ids } = body;
+  const { voter_token, liked_song_ids, session_token } = body;
+
+  // --- Validate session_token ---
+  if (typeof session_token !== 'string' || session_token.length !== 64) {
+    return err(400, 'session_token must be a 64-character hex string');
+  }
 
   // --- Validate voter_token ---
   if (typeof voter_token !== 'string' || voter_token.length !== 64) {
@@ -66,16 +73,47 @@ serve(async (req) => {
     return err(400, 'liked_song_ids must not contain duplicates');
   }
 
-  // --- Hash IP (never stored raw — GDPR) ---
-  const rawIp =
-    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
-  const ipHash = await sha256hex(rawIp);
-
-  // --- Supabase client with service_role (bypasses RLS) ---
   const supabase = createClient(
     Deno.env.get('SUPABASE_URL')!,
     Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
   );
+
+  // --- Проверяем session_token ---
+  const tokenHash = await sha256hex(session_token);
+
+  const { data: session, error: sessionError } = await supabase
+    .from('sessions')
+    .select('created_at, used_at')
+    .eq('token_hash', tokenHash)
+    .single();
+
+  if (sessionError || !session) {
+    return err(403, 'Invalid or expired session token');
+  }
+
+  if (session.used_at !== null) {
+    return err(403, 'Session token already used');
+  }
+
+  const sessionAgeMs = Date.now() - new Date(session.created_at).getTime();
+  if (sessionAgeMs < MIN_SESSION_AGE_MS) {
+    return err(403, 'Too fast. Please take your time with the songs.');
+  }
+
+  // --- Помечаем сессию как использованную ---
+  const { error: updateError } = await supabase
+    .from('sessions')
+    .update({ used_at: new Date().toISOString() })
+    .eq('token_hash', tokenHash);
+
+  if (updateError) {
+    return err(500, updateError.message);
+  }
+
+  // --- Hash IP (never stored raw — GDPR) ---
+  const rawIp =
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+  const ipHash = await sha256hex(rawIp);
 
   // --- UPSERT: один voter_token = один голос, повтор перезаписывает ---
   const { error: upsertError } = await supabase.from('votes').upsert(
